@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %}
+Календарь событий
+{% endblock title %}
+
+<!-- Подключение FullCalendar -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css">
+
+{% block content %}
+
+<div class="container">
+    <header class="text-calendar-event">
+        <a href="/" class="btn-event-calendar-text">На главную</a>
+        <br><br>
+        <h3>Календарь событий</h3>
+    </header>
+</div>
+
+<div class="container">
+    <div id="calendar"></div>
+</div>
+
+<!-- Подключение FullCalendar -->
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    let calendarEl = document.getElementById('calendar');
+
+    if (!calendarEl) {
+        console.error("❌ Календарь не найден на странице!");
+        return;
+    }
+
+    // Проверяем, получили ли мы события из Django
+    let eventsData;
+    try {
+        eventsData = JSON.parse('{{ events_json|escapejs }}');
+    } catch (error) {
+        console.error("❌ Ошибка парсинга JSON событий:", error);
+        eventsData = [];
+    }
+
+    let calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'dayGridMonth',
+        locale: 'ru',
+        events: eventsData,
+        eventClick: function(info) {
+            window.location.href = "/event/" + info.event.id + "/";
+        }
+    });
+
+    calendar.render();
+});
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    console.log("Данные событий:", JSON.parse('{{ events_json|escapejs }}'));
+});
+</script>
+
+{% endblock %}

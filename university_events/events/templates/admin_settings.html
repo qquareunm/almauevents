@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}Настройки администратора{% endblock title %}
+
+{% block content %}
+<div class="container">
+    <h3 class="admin-h3">Настройки администратора</h3>
+
+    <!-- Кнопка для экспорта данных в Excel -->
+    <div class="mt-4">
+        <a href="{% url 'export_registrations' %}" class="btn btn-success">
+            <i class="fas fa-download"></i> Скачать данные регистраций (Excel)
+        </a>
+    </div>
+</div>
+{% endblock %}

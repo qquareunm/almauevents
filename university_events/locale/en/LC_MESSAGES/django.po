@@ -1,0 +1,90 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-05-07 13:31+0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+#: .\events\templates\base.html:89
+msgid "События"
+msgstr "Events"
+
+msgid "Календарь"
+msgstr "Calendar"
+
+msgid "Тёмная тема"
+msgstr "Dark theme"
+
+msgid "Главная страница"
+msgstr "Home page"
+
+msgid "Главное изображение"
+msgstr "Main image"
+
+msgid "Изображение не найдено"
+msgstr "Image not found"
+
+msgid "Дорогой гость!"
+msgstr "Dear guest!"
+
+msgid ""
+"\n"
+"            Добро пожаловать на страницу мероприятий AlmaU. Здесь вы можете "
+"узнать о запланированных конференциях,\n"
+"            семинарах, гостевых лекциях, развлекательных ивентах нашего "
+"университета.<br>\n"
+"            Если вас заинтересовало определенное мероприятие, у вас есть "
+"возможность посетить его по предварительной записи.\n"
+"            Регистрация доступна в карточке каждого мероприятия. Ждем вас в "
+"AlmaU! 💙\n"
+"            "
+msgstr ""
+"\n"
+"            Welcome to the AlmaU events page. Here you can learn about "
+"upcoming conferences,\n"
+"            seminars, guest lectures, and entertainment events at our "
+"university.<br>\n"
+"            If you're interested in a particular event, you can attend it by "
+"registering in advance.\n"
+"            Registration is available on each event's card. We look forward "
+"to seeing you at AlmaU! 💙\n"
+"            "
+
+msgid "Все"
+msgstr "All"
+
+msgid "Все мероприятия"
+msgstr "All events"
+
+msgid "Выберите тип мероприятия"
+msgstr "Choose event type"
+
+msgid "Изображение события"
+msgstr "Event image"
+
+msgid "Изображение по умолчанию"
+msgstr "Default image"
+
+msgid "Russia"
+msgstr "Russian"
+
+msgid "English"
+msgstr "English"
+
+msgid "Kazakh"
+msgstr "Kazakh"
+
+msgid "events/"
+msgstr "events/"
