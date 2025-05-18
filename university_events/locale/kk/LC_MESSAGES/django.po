@@ -58,8 +58,44 @@ msgstr "Күнтізбе"
 msgid "Тёмная тема"
 msgstr "Қараңғы тақырып"
 
+msgid "Записаться"
+msgstr "Тіркелу"
 
+msgid "Описание"
+msgstr "Сипаттама"
 
+msgid "Дата"
+msgstr "Күн"
+
+msgid "Место"
+msgstr "Орын"
+
+msgid "Имя"
+msgstr "Аты"
+
+msgid "Фамилия"
+msgstr "Тегі"
+
+msgid "Электронная почта"
+msgstr "Электрондық пошта"
+
+msgid "Номер телефонa"
+msgstr "Телефон нөмірі"
+
+msgid "Комментарий"
+msgstr "Пікір"
+
+msgid "Отправить"
+msgstr "Жіберу"
+
+msgid "Закрыть"
+msgstr "Жабу"
+
+msgid "На главную"
+msgstr "Басты бетке"
+
+msgid "Календарь событий"
+msgstr "Оқиғалар күнтізбесі"
 
 
 

@@ -41,12 +41,6 @@ def index(request):
     })
 
 
-
-def calendar_page(request):
-    """ Страница с календарем событий """
-    events = Event.objects.all().values("id", "title", "date", "event_type__color")
-    return render(request, "calendar.html", {"events": list(events)})
-
 def calendar_view(request):
     """ Страница календаря с событиями """
     events = Event.objects.all().values("id", "title", "date", "event_type__color")
@@ -71,7 +65,7 @@ def event_detail(request, event_id):
     # Обрабатываем Markdown для описания события
     event.description = markdown.markdown(event.description)
 
-    error_message = None  # Создаем переменную для ошибки, которая будет отображаться в модальном окне
+    error_message = None  # Переменная для хранения сообщения об ошибке
 
     if request.method == "POST":
         form = RegistrationForm(request.POST)

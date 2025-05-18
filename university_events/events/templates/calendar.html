@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% load i18n %}
 {% block title %}
 Календарь событий
 {% endblock title %}
@@ -11,9 +11,9 @@
 
 <div class="container">
     <header class="text-calendar-event">
-        <a href="/" class="btn-event-calendar-text">На главную</a>
+        <a href="/" class="btn-event-calendar-text">{% trans "На главную" %}</a>
         <br><br>
-        <h3>Календарь событий</h3>
+        <h3>{% trans "Календарь событий" %}</h3>
     </header>
 </div>
 

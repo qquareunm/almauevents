@@ -23,9 +23,22 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-&e7(6=mhtffn5bro&qpe9s76_cyiobhk!+)ifo#(y3xl3da86y'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['almauevents.kz', 'www.almauevents.kz', '194.32.140.220']
+
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'almauevents',
+        'USER': 'dirous',
+        'PASSWORD': '494847aza',
+        'HOST': 'localhost',
+        'PORT': '',
+    }
+}
+
 
 
 # Application definition
@@ -54,7 +67,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'university_events.urls'
 
-TIME_ZONE = 'Asia/Almaty'  # Устанавливаем часовой пояс
+TIME_ZONE = 'Asia/Almaty'  
 USE_TZ = True
 
 
@@ -111,7 +124,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 
 gettext = lambda s:s
-
+LANGUAGE_CODE = 'ru'
 LANGUAGES = [
     ('ru', gettext('Russia')),
     ('en', gettext('English')),
@@ -122,7 +135,7 @@ LOCALE_PATHS = [
     os.path.join(BASE_DIR, 'locale'),
 ]
 
-USE_I18N = True
+USE_I18N = True   
 USE_L10N = True
 USE_TZ = True
 

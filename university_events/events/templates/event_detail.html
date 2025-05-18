@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% load i18n %}
 {% block title %}{{ event.title }}{% endblock %}
 
 {% block content %}
@@ -16,14 +16,14 @@
         <div class="col col-detail-right-side">
             <h2 class="mt-4">{{ event.title }}</h2>
             <hr>
-            <p><strong>Дата:</strong> {{ event.date }} ({{ event.start_time }} - {{ event.end_time }})</p>
-            <p><strong>Место:</strong> {{ event.location }}</p>
+            <p><strong>{% trans "Дата" %}:</strong> {{ event.date }} ({{ event.start_time }} - {{ event.end_time }})</p>
+            <p><strong>{% trans "Место" %}:</strong> {{ event.location }}</p>
             <hr>
         </div>
     </div>
     <hr>
     <div class="description-event-detail">
-        <p><strong>Описание:</strong></p>
+        <p><strong>{% trans "Описание" %}:</strong></p>
         <p>{{ event.description|safe }}</p>
     </div>
     <hr>
@@ -45,7 +45,7 @@
 
     <!-- Кнопка для открытия модального окна -->
     <button type="button" class="btn btn-success btn-lg" data-bs-toggle="modal" data-bs-target="#registrationModal">
-        Записаться
+        {% trans "Записаться"%}
     </button>
 </div>
 
@@ -61,28 +61,32 @@
                 <form method="post">
                     {% csrf_token %}
                     <div class="mb-3">
-                        <label for="id_first_name" class="form-label">Имя</label>
+                        <label for="id_first_name" class="form-label">{% trans "Имя" %}</label>
                         <input type="text" name="first_name" class="form-control" id="id_first_name" placeholder="Введите ваше имя" required>
                     </div>
                     <div class="mb-3">
-                        <label for="id_last_name" class="form-label">Фамилия</label>
+                        <label for="id_last_name" class="form-label">{% trans "Фамилия" %}</label>
                         <input type="text" name="last_name" class="form-control" id="id_last_name" placeholder="Введите вашу фамилию" required>
                     </div>
                     <div class="mb-3">
-                        <label for="id_email" class="form-label">Электронная почта</label>
+                        <label for="id_email" class="form-label">{% trans "Электронная почта" %}</label>
                         <input type="email" name="email" class="form-control" id="id_email" placeholder="Введите ваш email" required>
                     </div>
                     <div class="mb-3">
-                        <label for="id_phone_number" class="form-label">Телефон</label>
-                        <input type="text" name="phone_number" class="form-control" id="id_phone_number" placeholder="Введите ваш телефон">
+                        <label for="id_phone_number" class="form-label">{% trans "Номер телефонa" %}</label>
+                        <input type="text" name="phone_number" class="form-control" id="id_phone_number" 
+                               placeholder="Введите ваш телефон" 
+                               pattern="^\+?[1-9]\d{1,14}$" 
+                               title="Введите корректный номер телефона, например: +79161234567" 
+                               required>
                     </div>
                     <div class="mb-3">
-                        <label for="id_comment" class="form-label">Комментарий</label>
+                        <label for="id_comment" class="form-label">{%trans "Комментарий" %}</label>
                         <textarea name="comment" class="form-control" id="id_comment" rows="3" placeholder="Ваш комментарий"></textarea>
                     </div>
                     <div class="d-grid gap-2">
-                        <button type="submit" class="btn btn-primary btn-lg">Отправить</button>
-                        <button type="button" class="btn btn-secondary btn-lg" data-bs-dismiss="modal">Закрыть</button>
+                        <button type="submit" class="btn btn-primary btn-lg">{% trans "Отправить" %}</button>
+                        <button type="button" class="btn btn-secondary btn-lg" data-bs-dismiss="modal">{% trans "Закрыть" %}</button> <!-- Закрыть</button>
                     </div>
                 </form>
             </div>

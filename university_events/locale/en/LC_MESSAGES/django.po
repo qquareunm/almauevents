@@ -61,6 +61,14 @@ msgstr ""
 "            Registration is available on each event's card. We look forward "
 "to seeing you at AlmaU! 💙\n"
 "            "
+msgid "Конференции"
+msgstr "Conferences"
+
+msgid "Гостевые лекции"
+msgstr "Guest lectures"
+
+msgid "Развлекательные мероприятия"
+msgstr "Entertainment activities"
 
 msgid "Все"
 msgstr "All"
@@ -77,6 +85,39 @@ msgstr "Event image"
 msgid "Изображение по умолчанию"
 msgstr "Default image"
 
+msgid "Записаться"
+msgstr "Sign up"
+
+msgid "Описание"
+msgstr "Discription"
+
+msgid "Дата"
+msgstr "Date"
+
+msgid "Место"
+msgstr "Place"
+
+msgid "Имя"
+msgstr "Name"
+
+msgid "Фамилия"
+msgstr "Surname"
+
+msgid "Электронная почта"
+msgstr "E-mail"
+
+msgid "Номер телефонa"
+msgstr "Phone number"
+
+msgid "Комментарий"
+msgstr "Comment"
+
+msgid "Отправить"
+msgstr "Send"
+
+msgid "Закрыть"
+msgstr "Close"
+
 msgid "Russia"
 msgstr "Russian"
 
@@ -88,3 +129,9 @@ msgstr "Kazakh"
 
 msgid "events/"
 msgstr "events/"
+
+msgid "На главную"
+msgstr "To the main page"
+
+msgid "Календарь событий"
+msgstr "Events calendar"
