@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-&e7(6=mhtffn5bro&qpe9s76_cyiobhk!+)ifo#(y3xl3da86y
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['almauevents.kz', 'www.almauevents.kz', '194.32.140.220']
+ALLOWED_HOSTS = ['almauevents.kz', 'www.almauevents.kz', '194.32.140.220', '127.0.0.1']
 
 
 DATABASES = {

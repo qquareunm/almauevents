@@ -82,26 +82,6 @@ def event_detail(request, event_id):
                 registration.event = event
                 registration.save()
 
-                # Отправка email пользователю
-                try:
-                    send_mail(
-                        subject=f'Регистрация на {event.title}',
-                        message=(
-                            f'Здравствуйте, {registration.first_name}!\n\n'
-                            f'Вы успешно зарегистрированы на мероприятие: {event.title}.\n'
-                            f'📅 Дата: {event.date}\n'
-                            f'🕒 Время: {event.start_time} - {event.end_time}\n'
-                            f'📍 Место: {event.location}\n\n'
-                            f'Спасибо за регистрацию!'
-                        ),
-                        from_email=settings.EMAIL_HOST_USER,
-                        recipient_list=[registration.email],
-                        fail_silently=False,
-                    )
-                    print(f"✅ Email отправлен на {registration.email}")
-                except Exception as e:
-                    print(f"❌ Ошибка email: {str(e)}")
-
                 return redirect("success")
 
         else:
