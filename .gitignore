@@ -2,20 +2,31 @@
 venv/
 .venv/
 
-# Python-файлы кэша
+# Python кеши
 __pycache__/
 *.py[cod]
 
 # Логи
 *.log
 
-# База данных (если SQLite)
+# База данных SQLite
 db.sqlite3
 
-# Файлы среды
+# Файл с переменными окружения
 .env
+
+# Медиа и статика
+/media/
+/staticfiles/
 
 # IDE и системные файлы
 .vscode/
 .idea/
 .DS_Store
+
+# Миграции (если хочешь игнорировать, но не рекомендую)
+/*/migrations/
+!*/migrations/__init__.py
+
+# node_modules (если фронтенд есть)
+node_modules/
