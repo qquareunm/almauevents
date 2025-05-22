@@ -18,14 +18,29 @@ a, p, h1, h2, h3, h4, h5, h6, label, span, div {
     color: white !important;
 }
 
-/* Главная картинка */
 .img-index-main {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    height: auto; /* ← это делает изображение адаптивным */
+    object-fit: cover; /* можно убрать, если не нужно обрезание */
     margin: 30px 0;
     border-radius: 20px;
+    display: block;
+    max-width: 100%;
 }
+.card-img-main {
+    width: 100%;
+    height: auto; /* ← было 350px — лучше auto для мобильных */
+    object-fit: cover;
+    border-radius: 10px;
+    transition: transform 0.4s ease;
+}
+@media (max-width: 768px) {
+    .card-img-top {
+        height: auto;
+        object-fit: contain;
+    }
+}
+
 
 /* Кнопки */
 .btn-outline-primary.active {

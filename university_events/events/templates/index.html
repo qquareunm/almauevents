@@ -8,7 +8,7 @@
 <div class="border-1">
     <div class="container">
         {% if main_image and main_image.image %}
-            <img src="{{ main_image.image.url }}" class="img-index-main card-img-top" alt="{% trans 'Главное изображение' %}">
+            <img src="{{ main_image.image.url }}" class="img-index-main card-img-main" alt="{% trans 'Главное изображение' %}">
         {% else %}
             <p>{% trans 'Изображение не найдено' %}</p>
         {% endif %}
