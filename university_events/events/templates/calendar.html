@@ -1,14 +1,10 @@
 {% extends "base.html" %}
 {% load i18n %}
-{% block title %}
-Календарь событий
-{% endblock title %}
+{% block title %}Календарь событий{% endblock title %}
 
-<!-- Подключение FullCalendar -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css">
 
 {% block content %}
-
 <div class="container">
     <header class="text-calendar-event">
         <a href="/" class="btn-event-calendar-text">{% trans "На главную" %}</a>
@@ -21,7 +17,6 @@
     <div id="calendar"></div>
 </div>
 
-<!-- Подключение FullCalendar -->
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
 
 <script>
@@ -33,7 +28,6 @@ document.addEventListener('DOMContentLoaded', function () {
         return;
     }
 
-    // Проверяем, получили ли мы события из Django
     let eventsData;
     try {
         eventsData = JSON.parse('{{ events_json|escapejs }}');
@@ -43,11 +37,16 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     let calendar = new FullCalendar.Calendar(calendarEl, {
-        initialView: 'dayGridMonth',
+        initialView: 'dayGridMonth',  // только месячный вид
         locale: 'ru',
         events: eventsData,
         eventClick: function(info) {
             window.location.href = "/event/" + info.event.id + "/";
+        },
+        headerToolbar: {
+            left: 'prev,next today',
+            center: 'title',
+            right: ''  // без переключателей видов
         }
     });
 
@@ -55,10 +54,17 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 </script>
 
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-    console.log("Данные событий:", JSON.parse('{{ events_json|escapejs }}'));
-});
-</script>
-
+<style>
+  @media (max-width: 767px) {
+      #calendar {
+          font-size: 0.85rem;
+      }
+      .fc .fc-toolbar-title {
+          font-size: 1.2rem;
+      }
+      .fc-event-title {
+          white-space: normal;
+      }
+  }
+</style>
 {% endblock %}
