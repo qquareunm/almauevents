@@ -10,16 +10,16 @@
         {% if main_image and main_image.image %}
             <img src="{{ main_image.image.url }}" class="img-index-main card-img-main" alt="{% trans 'Главное изображение' %}">
         {% else %}
-            <p>{% trans 'Изображение не найдено' %}</p>
+            <p class="text-center">{% trans 'Изображение не найдено' %}</p>
         {% endif %}
     </div>
 </div>
 
-<!-- Красивый фон + заголовок -->
-<div class="header-container">
+
+<div class="header-container py-4">
     <div class="container text-center" id="index-main-welcome-text">
-        <h1>{% trans "Дорогой гость!" %}</h1>
-        <p>
+        <h1 class="display-5">{% trans "Дорогой гость!" %}</h1>
+        <p class="lead">
             {% blocktrans %}
             Добро пожаловать на страницу мероприятий AlmaU. Здесь вы можете узнать о запланированных конференциях,
             семинарах, гостевых лекциях, развлекательных ивентах нашего университета.<br>
@@ -30,16 +30,16 @@
     </div>
 </div>
 
-<br><br>
-<div class="container text-center mb-4">
-    <div class="event-type-buttons d-none d-md-flex">
-        <a href="?" class="button-events-type {% if not selected_event_type %}active{% endif %}" style="background-color: #007bff; text-decoration: none;" onclick="toggleActive(this)">{% trans "Все" %}</a>
-
+    <!-- Desktop -->
+<div class="container mb-4">
+    <div class="event-type-buttons d-none d-md-flex flex-wrap justify-content-center gap-2">
+        <a href="?" class="btn btn-primary {% if not selected_event_type %}active{% endif %}">
+            {% trans "Все" %}
+        </a>
         {% for event_type in event_types %}
             {% if event_type.name == "Развлекательные мероприятия" %}
-                <!-- Выпадающий список для Развлекательных мероприятий -->
                 <div class="dropdown">
-                    <button class="button-events-type dropdown-toggle" data-bs-toggle="dropdown" style="background-color: {{ event_type.color }};">
+                    <button class="btn dropdown-toggle" style="background-color: {{ event_type.color }};" data-bs-toggle="dropdown">
                         {{ event_type.styled_name }}
                     </button>
                     <ul class="dropdown-menu">
@@ -50,32 +50,28 @@
                     </ul>
                 </div>
             {% else %}
-                <a href="?event_type={{ event_type.id }}"
-                   class="button-events-type {% if selected_event_type == event_type.id|stringformat:'s' %}active{% endif %}"
-                   onclick="toggleActive(this)">
+                <a href="?event_type={{ event_type.id }}" class="btn" style="background-color: {{ event_type.color }};">
                     {{ event_type.styled_name }}
                 </a>
             {% endif %}
         {% endfor %}
     </div>
 
-    <!-- Мобильная версия: Выпадающий список -->
-    <div class="event-type-dropdown d-md-none">
+    <!-- Mobile -->
+    <div class="d-md-none">
         <div class="dropdown">
-            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+            <button class="btn btn-primary dropdown-toggle w-100" type="button" data-bs-toggle="dropdown">
                 {% trans "Выберите тип мероприятия" %}
             </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <ul class="dropdown-menu w-100">
                 <li><a class="dropdown-item" href="?">{% trans "Все" %}</a></li>
                 {% for event_type in event_types %}
                     <li>
                         <a class="dropdown-item" href="?event_type={{ event_type.id }}">{{ event_type.name }}</a>
                         {% if event_type.name == "Развлекательные мероприятия" %}
-                            <ul class="submenu">
-                                {% for subcategory in subcategories %}
-                                    <li><a class="dropdown-item" href="?event_type={{ event_type.id }}&subcategory={{ subcategory.id }}">{{ subcategory.name }}</a></li>
-                                {% endfor %}
-                            </ul>
+                            {% for subcategory in subcategories %}
+                                <li><a class="dropdown-item ps-4" href="?event_type={{ event_type.id }}&subcategory={{ subcategory.id }}">{{ subcategory.name }}</a></li>
+                            {% endfor %}
                         {% endif %}
                     </li>
                 {% endfor %}
@@ -84,13 +80,13 @@
     </div>
 </div>
 
-<!-- Блок с мероприятиями -->
+<!-- Карточки мероприятий -->
 <div class="container">
-    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    <div class="row g-4">
         {% for event in events %}
-        <div class="col">
-            <a href="{% url 'event_detail' event.id %}" class="event-card" style="text-decoration: none;">
-                <div class="card shadow-sm">
+        <div class="col-12 col-md-6 col-lg-4">
+            <a href="{% url 'event_detail' event.id %}" class="text-decoration-none">
+                <div class="card h-100 shadow-sm">
                     {% if event.image %}
                         <img src="{{ event.image.url }}" class="card-img-top card-img-top-2" alt="{% trans 'Изображение события' %}">
                     {% else %}
@@ -98,7 +94,7 @@
                     {% endif %}
                     <div class="card-body">
                         <h5 class="card-title">{{ event.title }}</h5>
-                        <span><strong></strong> {{ event.date }}</span>
+                        <p class="card-text"><strong>{{ event.date }}</strong></p>
                     </div>
                 </div>
             </a>
@@ -106,15 +102,4 @@
         {% endfor %}
     </div>
 </div>
-
-<script>
-    function toggleActive(button) {
-        button.classList.toggle('active');
-    }
-
-    function changeEventType(select) {
-        window.location.href = select.value;
-    }
-</script>
-
 {% endblock %}
