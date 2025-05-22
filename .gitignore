@@ -19,6 +19,7 @@ db.sqlite3
 # Медиа и статика
 /media/
 /staticfiles/
+university_events/staticfiles/
 
 # IDE и системные файлы
 .vscode/
