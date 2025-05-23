@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card mb-4">
+        <div class="card-body">
+            <h4>Поиск моих мероприятий</h4>
+            <form method="get">
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" class="form-control" id="email" name="email" 
+                           value="{{ search_email }}" placeholder="Ваш email">
+                </div>
+                <div class="form-group mt-3">
+                    <label>Или</label>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Телефон:</label>
+                    <input type="tel" class="form-control" id="phone" name="phone" 
+                           value="{{ search_phone }}" placeholder="Ваш телефон">
+                </div>
+                <button type="submit" class="btn btn-primary mt-3">Найти</button>
+            </form>
+        </div>
+    </div>
+    
+    {% if error %}
+        <div class="alert alert-danger">{{ error }}</div>
+    {% endif %}
+    
+    {% if registrations %}
+        <h3>Мои мероприятия</h3>
+        
+        {% if search_email %}
+            <p>Найдено по email: {{ search_email }}</p>
+        {% else %}
+            <p>Найдено по телефону: {{ search_phone }}</p>
+        {% endif %}
+        
+        <div class="list-group mt-4">
+            {% for reg in registrations %}
+                <div class="list-group-item mb-3">
+                    <h5>{{ reg.event.title }}</h5>
+                    <p><strong>Дата:</strong> {{ reg.event.date }} в {{ reg.event.start_time }}</p>
+                    <p><strong>Место:</strong> {{ reg.event.location }}</p>
+                    <p><strong>Дата регистрации:</strong> {{ reg.created_at|date:"d.m.Y H:i" }}</p>
+                    {% if reg.comment %}
+                        <p><strong>Ваш комментарий:</strong> {{ reg.comment }}</p>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+    {% elif request.GET %}
+        <div class="alert alert-info">
+            Нет зарегистрированных мероприятий для указанных данных.
+        </div>
+    {% endif %}
+    
+    <a href="{% url 'index' %}" class="btn btn-secondary mt-3">На главную</a>
+</div>
+{% endblock %}
