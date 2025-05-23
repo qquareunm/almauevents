@@ -21,8 +21,8 @@ class EventAdmin(TranslationAdmin):
 
 @admin.register(Registration)
 class RegistrationAdmin(admin.ModelAdmin):
-    list_display = ('first_name', 'last_name', 'email', 'event')  # Поля, отображаемые в списке
-    list_filter = ('event',)  # Фильтр по событию
-    search_fields = ('first_name', 'last_name', 'email')  # Поиск по имени, фамилии и email
+    list_display = ('first_name', 'last_name', 'email', 'phone_number', 'event', 'created_at')
+    list_filter = ('event', 'created_at')
+    search_fields = ('first_name', 'last_name', 'email', 'phone_number', 'event__title')
 
 admin.site.register(MainImage)

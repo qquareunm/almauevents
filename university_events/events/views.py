@@ -1,5 +1,5 @@
 import json
-
+import re
 from django.contrib.admin.views.decorators import staff_member_required
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, JsonResponse
@@ -97,6 +97,32 @@ def event_detail(request, event_id):
         "error_message": error_message,  # Передаем ошибку в шаблон
     })
 
+
+import re
+
+def my_events(request):
+    phone = request.GET.get('phone', '')
+    email = request.GET.get('email', '')
+    
+    # Оставляем только цифры из телефона
+    clean_phone = re.sub(r'\D', '', phone) if phone else ''
+    
+    if clean_phone:
+        # Убираем первую 8 или +7 (оставляем 10 цифр)
+        phone_for_search = clean_phone[-10:] if len(clean_phone) > 10 else clean_phone
+        registrations = Registration.objects.filter(
+            phone_number__contains=phone_for_search
+        )
+    elif email:
+        registrations = Registration.objects.filter(email=email)
+    else:
+        registrations = Registration.objects.none()
+    
+    return render(request, "my_events.html", {
+        'registrations': registrations,
+        'search_phone': phone,
+        'search_email': email
+    })
 
 
 
