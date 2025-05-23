@@ -1,5 +1,6 @@
 import json
 import re
+from django.utils import timezone
 from django.contrib.admin.views.decorators import staff_member_required
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, JsonResponse
@@ -11,13 +12,24 @@ from django.core.mail import send_mail
 from django.conf import settings
 from datetime import datetime
 import markdown
-
+from django.db.models import Q
 
 def index(request):
     event_type_id = request.GET.get('event_type', None)
     subcategory_id = request.GET.get('subcategory', None)
 
-    events = Event.objects.all().order_by("date")
+    events = Event.objects.filter(
+        date__gte=timezone.now().date()
+    ).order_by("date", "start_time")
+
+ 
+
+    events = Event.objects.filter(
+        Q(date__gt=timezone.now().date()) |
+        Q(date=timezone.now().date(), end_time__gte=timezone.now().time())
+    ).order_by("date", "start_time")
+
+  
     main_image = MainImage.objects.first()
     event_types = EventType.objects.all()
 
@@ -27,7 +39,6 @@ def index(request):
     if subcategory_id:
         events = events.filter(subcategory_id=subcategory_id)
 
-    # Получаем подкатегории для "Развлекательных мероприятий"
     entertainment_event_type = EventType.objects.filter(name="Развлекательные мероприятия").first()
     subcategories = SubCategory.objects.filter(event_type=entertainment_event_type) if entertainment_event_type else []
 
@@ -35,7 +46,7 @@ def index(request):
         "events": events,
         "event_types": event_types,
         "selected_event_type": event_type_id,
-        "subcategories": subcategories,  # Передаем подкатегории всегда
+        "subcategories": subcategories,
         "selected_subcategory": subcategory_id,
         'main_image': main_image,
     })
@@ -140,8 +151,8 @@ def admin_settings(request):
 
 @staff_member_required
 def export_registrations_to_excel(request):
-    """Экспорт данных о регистрациях в Excel с красивым оформлением"""
-    registrations = Registration.objects.all()
+    """Экспорт данных о регистрациях в Excel с сортировкой по мероприятиям"""
+    registrations = Registration.objects.select_related("event").order_by("event__title", "last_name")
 
     workbook = openpyxl.Workbook()
     sheet = workbook.active
@@ -150,7 +161,7 @@ def export_registrations_to_excel(request):
     # Заголовки столбцов
     headers = ["Имя", "Фамилия", "Email", "Телефон", "Событие", "Дата регистрации"]
 
-    header_font = Font(bold=True)  # Делаем заголовки жирными
+    header_font = Font(bold=True)
 
     for col_num, header in enumerate(headers, 1):
         cell = sheet.cell(row=1, column=col_num)
@@ -165,16 +176,14 @@ def export_registrations_to_excel(request):
         sheet.cell(row=row_num, column=4, value=reg.phone_number)
         sheet.cell(row=row_num, column=5, value=reg.event.title)
 
-        # красивое форматирование даты и времени
         created_at_display = reg.created_at.strftime("%d-%m-%Y %H:%M") if reg.created_at else "Не указано"
         sheet.cell(row=row_num, column=6, value=created_at_display)
 
     # Автоматическая ширина столбцов
     for column_cells in sheet.columns:
-        length = max(len(str(cell.value)) for cell in column_cells)
+        length = max(len(str(cell.value)) for cell in column_cells if cell.value)
         sheet.column_dimensions[column_cells[0].column_letter].width = length + 2
 
-    # Создание HTTP-ответа
     response = HttpResponse(
         content_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
     )
