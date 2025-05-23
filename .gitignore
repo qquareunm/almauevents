@@ -16,19 +16,12 @@ db.sqlite3
 # Файл с переменными окружения
 .env
 
-# Медиа и статика
-/media/
+# Медиа файлы
+media/
 /staticfiles/
-university_events/staticfiles/
-
+*/media/*
+!media/__init__.py
 # IDE и системные файлы
 .vscode/
 .idea/
 .DS_Store
-
-# Миграции (если хочешь игнорировать, но не рекомендую)
-/*/migrations/
-!*/migrations/__init__.py
-
-# node_modules (если фронтенд есть)
-node_modules/
