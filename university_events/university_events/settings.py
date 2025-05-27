@@ -27,17 +27,35 @@ DEBUG = False
 
 ALLOWED_HOSTS = ['almauevents.kz', 'www.almauevents.kz', '194.32.140.220', '127.0.0.1', 'localhost']
 
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'almauevents',
-        'USER': 'dirous',
-        'PASSWORD': '494847aza',
-        'HOST': 'localhost',
-        'PORT': '',
+if os.getenv('DJANGO_ENV') == 'production':
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'almauevents',
+            'USER': 'dirous',
+            'PASSWORD': '494847aza',
+            'HOST': 'localhost',
+            'PORT': '5432',
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'almauevents',
+#         'USER': 'dirous',
+#         'PASSWORD': '494847aza',
+#         'HOST': 'localhost',
+#         'PORT': '',
+#     }
+# }
 
 
 
@@ -93,12 +111,12 @@ WSGI_APPLICATION = 'university_events.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 
 
 # Password validation

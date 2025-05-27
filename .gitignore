@@ -11,7 +11,8 @@ __pycache__/
 *.log
 
 # База данных SQLite
-db.sqlite3
+university_events/db.sqlite3
+
 
 
 # Файл с переменными окружения
