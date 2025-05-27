@@ -25,8 +25,7 @@ def index(request):
  
 
     events = Event.objects.filter(
-        Q(date__gt=timezone.now().date()) |
-        Q(date=timezone.now().date(), end_time__gte=timezone.now().time())
+        Q(date__gt=timezone.now().date())
     ).order_by("date", "start_time")
 
   

@@ -37,7 +37,6 @@ class Event(models.Model):
     description = models.TextField()
     date = models.DateField()
     start_time = models.TimeField()
-    end_time = models.TimeField()
     location = models.CharField(max_length=255)
     image = models.ImageField(upload_to="event_images/", null=True, blank=True)
     event_type = models.ForeignKey(EventType, on_delete=models.CASCADE)

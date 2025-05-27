@@ -23,7 +23,7 @@ class EventImageInline(admin.TabularInline):
 @admin.register(Event)
 class EventAdmin(TranslationAdmin):  # Используем TranslationAdmin с inline
     list_display = ('title', 'date')
-    fields = ('title', 'description', 'date', 'start_time', 'end_time', 'location', 'image', 'event_type', 'subcategory', 'report')
+    fields = ('title', 'description', 'date', 'start_time', 'location', 'image', 'event_type', 'subcategory', 'report')
     search_fields = ('title', 'description')
     inlines = [EventImageInline]
 
