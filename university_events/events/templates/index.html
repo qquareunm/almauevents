@@ -32,14 +32,16 @@
 
     <!-- Desktop -->
 <div class="container mb-4">
-    <div class="event-type-buttons d-none d-md-flex flex-wrap justify-content-center gap-2">
+    <div class="event-type-buttons d-none d-md-flex flex-wrap justify-content-center gap-2 align-items-center">
         <a href="?" class="btn btn-primary {% if not selected_event_type %}active{% endif %}">
             {% trans "Все" %}
         </a>
         {% for event_type in event_types %}
             {% if event_type.name == "Развлекательные мероприятия" %}
                 <div class="dropdown">
-                    <button class="btn dropdown-toggle" style="background-color: {{ event_type.color }};" data-bs-toggle="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" 
+                            style="background-color: {{ event_type.color }}; color: white;" 
+                            data-bs-toggle="dropdown" aria-expanded="false">
                         {{ event_type.styled_name }}
                     </button>
                     <ul class="dropdown-menu">
@@ -50,12 +52,13 @@
                     </ul>
                 </div>
             {% else %}
-                <a href="?event_type={{ event_type.id }}" class="btn" style="background-color: {{ event_type.color }};">
+                <a href="?event_type={{ event_type.id }}" class="btn" style="background-color: {{ event_type.color }}; color: white;">
                     {{ event_type.styled_name }}
                 </a>
             {% endif %}
         {% endfor %}
     </div>
+    
 
     <!-- Mobile -->
     <div class="d-md-none">
