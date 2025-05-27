@@ -10,4 +10,6 @@ urlpatterns = [
     path("export-registrations/", views.export_registrations_to_excel, name="export_registrations"),
     path("settings/", views.admin_settings, name="admin_settings"),  
     path("export/", views.export_registrations_to_excel, name="export_registrations"),
+    path("gallery/", views.gallery_view, name="gallery"),
+    path('past-event/<int:event_id>/', views.past_event_detail, name='past_event_detail'),
 ]

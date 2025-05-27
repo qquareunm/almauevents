@@ -5,6 +5,7 @@ venv/
 # Python кеши
 __pycache__/
 *.py[cod]
+*.pyc
 
 # Логи
 *.log

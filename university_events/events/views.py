@@ -4,7 +4,7 @@ from django.utils import timezone
 from django.contrib.admin.views.decorators import staff_member_required
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, JsonResponse
-from .models import Event, Registration, EventType, MainImage, SubCategory
+from .models import Event, Registration, EventType, MainImage, SubCategory, EventImage
 from .forms import RegistrationForm
 import openpyxl
 from openpyxl.styles import Font
@@ -191,3 +191,22 @@ def export_registrations_to_excel(request):
     workbook.save(response)
 
     return response
+
+
+def gallery_view(request):
+    past_events = Event.objects.filter(date__lt=timezone.now().date()).order_by("-date")
+    return render(request, "gallery.html", {"past_events": past_events})
+
+def past_event_detail(request, event_id):
+    event = get_object_or_404(Event, id=event_id)
+
+
+    report_html = markdown.markdown(event.report) if event.report else ""
+
+    images = event.images.all()
+
+    return render(request, "past_event_detail.html", {
+        "event": event,
+        "report_html": report_html,
+        "images": images,
+    })

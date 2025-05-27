@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="text-center">
+  <h2 class="gallery-title mb-4">Галерея прошедших мероприятий</h2>
+</div>
+
+
+
+<div class="container-fluid">
+  <div class="row px-3 justify-content-center">
+    {% for event in past_events %}
+    <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
+
+
+        <div class="event-card card h-100 shadow-sm">
+          {% if event.images.first %}
+            <a href="{% url 'past_event_detail' event.id %}">
+              <img src="{{ event.images.first.image.url }}" class="card-img-top event-card-img" alt="Фото мероприятия">
+            </a>
+          {% else %}
+            <img src="/static/default.png" class="card-img-top event-card-img" alt="Фото по умолчанию">
+          {% endif %}
+          <div class="card-body">
+            <h5 class="card-title">
+              <a href="{% url 'past_event_detail' event.id %}" class="text-decoration-none ">
+                {{ event.title }}
+              </a>
+            </h5>
+            <p class="card-text"><strong>{{ event.date }}</strong></p>
+          </div>
+        </div>
+      </div>
+    {% empty %}
+      <p>Пока нет прошедших мероприятий.</p>
+    {% endfor %}
+  </div>
+</div>
+
+{% endblock %}

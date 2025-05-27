@@ -42,6 +42,7 @@ class Event(models.Model):
     image = models.ImageField(upload_to="event_images/", null=True, blank=True)
     event_type = models.ForeignKey(EventType, on_delete=models.CASCADE)
     subcategory = models.ForeignKey(SubCategory, on_delete=models.SET_NULL, null=True, blank=True)
+    report = models.TextField(blank=True, null=True, help_text="Отчёт о том, как прошло мероприятие")
 
     def __str__(self):
         return self.title
@@ -64,3 +65,12 @@ class Registration(models.Model):
 
 class MainImage(models.Model):
     image = models.ImageField(upload_to="event_images/", null=True, blank=True)
+
+
+class EventImage(models.Model):
+    event = models.ForeignKey(Event, on_delete=models.CASCADE, related_name='images')
+    image = models.ImageField(upload_to='event_images/')
+    caption = models.CharField(max_length=255, blank=True, null=True)
+    def __str__(self):
+        return f"Image for {self.event.title}"
+
