@@ -18,19 +18,19 @@ class EventType(models.Model):
         """Возвращаем HTML с цветной кнопкой"""
         return format_html(
             '<span style="background-color: {}; color: {}; padding: 5px 10px; border-radius: 5px;">{}</span>',
-            self.color, self.get_text_color(), _(self.name)  # Используем перевод
+            self.color, self.get_text_color(), _(self.name)  
         )
 
     def __str__(self):
-        return (self.name)  # Переводим строку на уровне модели
+        return (self.name)  
 
 
 class SubCategory(models.Model):
     name = models.CharField(max_length=100, unique=True)
-    event_type = models.ForeignKey(EventType, on_delete=models.CASCADE, related_name="subcategories")  # Связь с типом события
+    event_type = models.ForeignKey(EventType, on_delete=models.CASCADE, related_name="subcategories")  
 
     def __str__(self):
-        return (self.name)  # Переводим строку на уровне модели
+        return (self.name) 
 
 class Event(models.Model):
     title = models.CharField(max_length=255)

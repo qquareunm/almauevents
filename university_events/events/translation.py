@@ -11,4 +11,4 @@ class SubCategoryTranslationOptions(TranslationOptions):
 
 @register(Event)
 class EventTranslationOptions(TranslationOptions):
-    fields = ('title', 'description', 'location')
+    fields = ('title', 'description', 'location', 'report')

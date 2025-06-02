@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     let calendar = new FullCalendar.Calendar(calendarEl, {
-        initialView: 'dayGridMonth',  // только месячный вид
+        initialView: 'dayGridMonth',  
         locale: 'ru',
         events: eventsData,
         eventClick: function(info) {
@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function () {
         headerToolbar: {
             left: 'prev,next today',
             center: 'title',
-            right: ''  // без переключателей видов
+            right: ''  
         }
     });
 

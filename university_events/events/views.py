@@ -59,7 +59,7 @@ def calendar_view(request):
         events_list.append({
             "id": event["id"],
             "title": event["title"],
-            "start": str(event["date"]),  # Преобразуем дату в строку
+            "start": str(event["date"]),  
             "color": event["event_type__color"] if event["event_type__color"] else "#007bff"
         })
 
@@ -72,22 +72,22 @@ def event_detail(request, event_id):
     """ Детальная страница мероприятия """
     event = get_object_or_404(Event, id=event_id)
 
-    # Обрабатываем Markdown для описания события
+  
     event.description = markdown.markdown(event.description)
 
-    error_message = None  # Переменная для хранения сообщения об ошибке
+    error_message = None  
 
     if request.method == "POST":
         form = RegistrationForm(request.POST)
         if form.is_valid():
             email = form.cleaned_data['email']
 
-            # Проверка на наличие уже существующей регистрации
+            
             existing_registration = Registration.objects.filter(event=event, email=email).first()
             if existing_registration:
                 error_message = "Вы уже зарегистрированы на это событие с этим email."
             else:
-                # Если регистрации нет, сохраняем новую
+                
                 registration = form.save(commit=False)
                 registration.event = event
                 registration.save()
@@ -95,7 +95,7 @@ def event_detail(request, event_id):
                 return redirect("success")
 
         else:
-            # Если форма невалидна
+            
             error_message = "Ошибка при регистрации. Пожалуйста, проверьте данные и попробуйте снова."
 
     else:
@@ -104,7 +104,7 @@ def event_detail(request, event_id):
     return render(request, "event_detail.html", {
         "event": event,
         "form": form,
-        "error_message": error_message,  # Передаем ошибку в шаблон
+        "error_message": error_message,  
     })
 
 
@@ -114,11 +114,11 @@ def my_events(request):
     phone = request.GET.get('phone', '')
     email = request.GET.get('email', '')
     
-    # Оставляем только цифры из телефона
+    
     clean_phone = re.sub(r'\D', '', phone) if phone else ''
     
     if clean_phone:
-        # Убираем первую 8 или +7 (оставляем 10 цифр)
+        
         phone_for_search = clean_phone[-10:] if len(clean_phone) > 10 else clean_phone
         registrations = Registration.objects.filter(
             phone_number__contains=phone_for_search
@@ -144,7 +144,7 @@ def success(request):
 def admin_settings(request):
     """Страница настроек для администратора"""
     if not request.user.is_staff:
-        return redirect('index')  # Перенаправляем, если пользователь не админ
+        return redirect('index')  
 
     return render(request, 'admin_settings.html')
 
@@ -157,7 +157,7 @@ def export_registrations_to_excel(request):
     sheet = workbook.active
     sheet.title = "Регистрации"
 
-    # Заголовки столбцов
+    
     headers = ["Имя", "Фамилия", "Email", "Телефон", "Событие", "Дата регистрации"]
 
     header_font = Font(bold=True)
@@ -167,7 +167,7 @@ def export_registrations_to_excel(request):
         cell.value = header
         cell.font = header_font
 
-    # Данные
+    
     for row_num, reg in enumerate(registrations, start=2):
         sheet.cell(row=row_num, column=1, value=reg.first_name)
         sheet.cell(row=row_num, column=2, value=reg.last_name)
@@ -178,7 +178,7 @@ def export_registrations_to_excel(request):
         created_at_display = reg.created_at.strftime("%d-%m-%Y %H:%M") if reg.created_at else "Не указано"
         sheet.cell(row=row_num, column=6, value=created_at_display)
 
-    # Автоматическая ширина столбцов
+   
     for column_cells in sheet.columns:
         length = max(len(str(cell.value)) for cell in column_cells if cell.value)
         sheet.column_dimensions[column_cells[0].column_letter].width = length + 2

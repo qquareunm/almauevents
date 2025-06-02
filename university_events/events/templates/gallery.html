@@ -16,12 +16,13 @@
 
         <div class="event-card card h-100 shadow-sm">
           {% if event.images.first %}
-            <a href="{% url 'past_event_detail' event.id %}">
-              <img src="{{ event.images.first.image.url }}" class="card-img-top event-card-img" alt="Фото мероприятия">
-            </a>
+          <img src="{{ event.images.first.image.url }}" class="card-img-top event-card-img" alt="Фото мероприятия">
+           {% elif event.image %}
+          <img src="{{ event.image.url }}" class="card-img-top event-card-img" alt="Фото мероприятия">
           {% else %}
-            <img src="/static/default.png" class="card-img-top event-card-img" alt="Фото по умолчанию">
+          <img src="/static/default.png" class="card-img-top event-card-img" alt="Фото по умолчанию">
           {% endif %}
+      
           <div class="card-body">
             <h5 class="card-title">
               <a href="{% url 'past_event_detail' event.id %}" class="text-decoration-none ">
