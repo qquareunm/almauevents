@@ -8,11 +8,9 @@ from .models import Event, Registration, EventType, MainImage, SubCategory, Even
 from .forms import RegistrationForm
 import openpyxl
 from openpyxl.styles import Font
-from django.core.mail import send_mail
-from django.conf import settings
-from datetime import datetime
 import markdown
 from django.db.models import Q
+from django.core.paginator import Paginator
 
 def index(request):
     event_type_id = request.GET.get('event_type', None)
@@ -208,4 +206,17 @@ def past_event_detail(request, event_id):
         "event": event,
         "report_html": report_html,
         "images": images,
+    })
+
+
+
+
+def gallery_view(request):
+    past_events = Event.objects.filter(date__lt=timezone.now()).order_by('-date')
+    paginator = Paginator(past_events, 6)  
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    
+    return render(request, 'gallery.html', {
+        'past_events': page_obj  
     })
