@@ -246,3 +246,6 @@ msgstr "Back to gallery"
 
 msgid "Галерея"
 msgstr "Gallery"
+
+msgid "Информация о прошедшем мероприятии"
+msgstr "Information about the past event"
