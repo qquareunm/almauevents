@@ -1,25 +1,26 @@
 {% extends "base.html" %}
+{% load i18n %}
 
 {% block content %}
 <div class="container mt-5">
     <div class="card mb-4">
         <div class="card-body">
-            <h4>Поиск моих мероприятий</h4>
+            <h4>{% trans "Поиск моих мероприятий" %}</h4>
             <form method="get">
                 <div class="form-group">
-                    <label for="email">Email:</label>
+                    <label for="email">{% trans "Email:" %}</label>
                     <input type="email" class="form-control" id="email" name="email" 
-                           value="{{ search_email }}" placeholder="Ваш email">
+                           value="{{ search_email }}" placeholder="{% trans 'Ваш email' %}">
                 </div>
                 <div class="form-group mt-3">
-                    <label>Или</label>
+                    <label>{% trans "Или" %}</label>
                 </div>
                 <div class="form-group">
-                    <label for="phone">Телефон:</label>
+                    <label for="phone">{% trans "Телефон:" %}</label>
                     <input type="tel" class="form-control" id="phone" name="phone" 
-                           value="{{ search_phone }}" placeholder="Ваш телефон">
+                           value="{{ search_phone }}" placeholder="{% trans 'Ваш телефон' %}">
                 </div>
-                <button type="submit" class="btn btn-primary mt-3">Найти</button>
+                <button type="submit" class="btn btn-primary mt-3">{% trans "Найти" %}</button>
             </form>
         </div>
     </div>
@@ -29,33 +30,33 @@
     {% endif %}
     
     {% if registrations %}
-        <h3>Мои мероприятия</h3>
+        <h3>{% trans "Мои мероприятия" %}</h3>
         
         {% if search_email %}
-            <p>Найдено по email: {{ search_email }}</p>
+            <p>{% blocktrans %}Найдено по email: {{ search_email }}{% endblocktrans %}</p>
         {% else %}
-            <p>Найдено по телефону: {{ search_phone }}</p>
+            <p>{% blocktrans %}Найдено по телефону: {{ search_phone }}{% endblocktrans %}</p>
         {% endif %}
         
         <div class="list-group mt-4">
             {% for reg in registrations %}
                 <div class="list-group-item mb-3">
                     <h5>{{ reg.event.title }}</h5>
-                    <p><strong>Дата:</strong> {{ reg.event.date }} в {{ reg.event.start_time }}</p>
-                    <p><strong>Место:</strong> {{ reg.event.location }}</p>
-                    <p><strong>Дата регистрации:</strong> {{ reg.created_at|date:"d.m.Y H:i" }}</p>
+                    <p><strong>{% trans "Дата:" %}</strong> {{ reg.event.date }} {% trans "в" %} {{ reg.event.start_time }}</p>
+                    <p><strong>{% trans "Место:" %}</strong> {{ reg.event.location }}</p>
+                    <p><strong>{% trans "Дата регистрации:" %}</strong> {{ reg.created_at|date:"d.m.Y H:i" }}</p>
                     {% if reg.comment %}
-                        <p><strong>Ваш комментарий:</strong> {{ reg.comment }}</p>
+                        <p><strong>{% trans "Ваш комментарий:" %}</strong> {{ reg.comment }}</p>
                     {% endif %}
                 </div>
             {% endfor %}
         </div>
     {% elif request.GET %}
         <div class="alert alert-info">
-            Нет зарегистрированных мероприятий для указанных данных.
+            {% trans "Нет зарегистрированных мероприятий для указанных данных." %}
         </div>
     {% endif %}
     
-    <a href="{% url 'index' %}" class="btn btn-secondary mt-3">На главную</a>
+    <a href="{% url 'index' %}" class="btn btn-secondary mt-3">{% trans "На главную" %}</a>
 </div>
 {% endblock %}
