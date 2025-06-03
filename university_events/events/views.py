@@ -9,7 +9,6 @@ from .forms import RegistrationForm
 import openpyxl
 from openpyxl.styles import Font
 import markdown
-from django.db.models import Q
 from django.core.paginator import Paginator
 
 def index(request):
@@ -17,7 +16,7 @@ def index(request):
     subcategory_id = request.GET.get('subcategory', None)
 
     events = Event.objects.filter(
-        Q(date__gte=timezone.now().date())
+        date__gte=timezone.now().date()
     ).order_by("date", "start_time")
 
   
