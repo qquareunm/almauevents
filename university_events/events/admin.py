@@ -36,4 +36,4 @@ class RegistrationAdmin(admin.ModelAdmin):
 
 
 admin.site.register(MainImage)
-admin.site.register(EventImage)
+

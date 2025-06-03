@@ -2,6 +2,7 @@
 {% load static %}
 {% load i18n %}
 {% block title %}{% trans "Галерея прошедших мероприятий" %}{% endblock title %}
+
 {% block content %}
 <div class="text-center">
   <h2 class="gallery-title mb-4">{% trans "Галерея прошедших мероприятий" %}</h2>
@@ -13,12 +14,10 @@
     {% for event in past_events|slice:":3" %}
     <div class="col-md-4 mb-4">
       <div class="event-card card h-100 shadow-sm">
-        {% if event.images.first %}
-        <img src="{{ event.images.first.image.url }}" class="card-img-top event-card-img" alt="{% trans 'Фото мероприятия' %}">
-        {% elif event.image %}
+        {% if event.image %}
         <img src="{{ event.image.url }}" class="card-img-top event-card-img" alt="{% trans 'Фото мероприятия' %}">
         {% else %}
-        <img src="/static/default.png" class="card-img-top event-card-img" alt="{% trans 'Фото по умолчанию' %}">
+        <img src="{% static 'default.png' %}" class="card-img-top event-card-img" alt="{% trans 'Фото по умолчанию' %}">
         {% endif %}
 
         <div class="card-body">
@@ -42,12 +41,10 @@
     {% for event in past_events|slice:"3:6" %}
     <div class="col-md-4 mb-4">
       <div class="event-card card h-100 shadow-sm">
-        {% if event.images.first %}
-        <img src="{{ event.images.first.image.url }}" class="card-img-top event-card-img" alt="{% trans 'Фото мероприятия' %}">
-        {% elif event.image %}
+        {% if event.image %}
         <img src="{{ event.image.url }}" class="card-img-top event-card-img" alt="{% trans 'Фото мероприятия' %}">
         {% else %}
-        <img src="/static/default.png" class="card-img-top event-card-img" alt="{% trans 'Фото по умолчанию' %}">
+        <img src="{% static 'default.png' %}" class="card-img-top event-card-img" alt="{% trans 'Фото по умолчанию' %}">
         {% endif %}
 
         <div class="card-body">
@@ -97,36 +94,36 @@
     border-radius: 10px;
     overflow: hidden;
   }
-  
+
   .event-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
   }
-  
+
   .event-card-img {
     height: 200px;
     object-fit: cover;
     transition: transform 0.3s ease;
   }
-  
+
   .event-card:hover .event-card-img {
     transform: scale(1.05);
   }
-  
+
   .card-body {
     padding: 1.25rem;
   }
-  
+
   .card-title {
     font-size: 1.1rem;
     margin-bottom: 0.75rem;
   }
-  
+
   .pagination .page-item.active .page-link {
     background-color: #1E3A8A;
     border-color: #1E3A8A;
   }
-  
+
   .page-link {
     color: #1E3A8A;
   }
