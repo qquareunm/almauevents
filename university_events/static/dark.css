@@ -191,14 +191,14 @@ a, p, h1, h2, h3, h4, h5, h6, label, span, div {
     }
 }
 .btn-event-calendar-text {
-    background-color: rgba(40, 72, 133, 1); /* Лучше использовать rgba для прозрачности */
+    background-color: rgba(40, 72, 133, 1); 
     border: none;
     padding: 10px 35px;
     border-radius: 7px;
     text-decoration: none;
     color: rgb(255, 255, 255);
     transition: .4s;
-    margin-top: 10px; /* <-- Добавляем отступ сверху */
+    margin-top: 10px;
 }
 @media (max-width: 768px) {
     .event-main-content {
