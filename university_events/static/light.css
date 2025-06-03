@@ -200,6 +200,15 @@ a, p, h1, h2, h3, h4, h5, h6, label, span, div {
       height: 250px;
     }
   }
+  .btn-event-calendar-text {
+    background-color: rgb(40, 72, 133, 100%);
+    border: none;
+    padding: 10px 35px;
+    border-radius: 7px;
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    transition: .4s;
+}
 /* Специальные стили для светлой темы */
 .gallery-title {
     color: #333;
@@ -367,4 +376,18 @@ a, p, h1, h2, h3, h4, h5, h6, label, span, div {
 
 .back-to-gallery-btn:hover {
     background-color: #142e66;
+}
+.fc .fc-button {
+    background-color: transparent;
+    color: white; 
+    border: none;
+}
+
+.fc .fc-button:hover {
+    background-color: rgba(255, 255, 255, 0.1); 
+}
+
+
+.fc-icon {
+    color: white;
 }

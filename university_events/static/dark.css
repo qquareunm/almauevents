@@ -190,7 +190,16 @@ a, p, h1, h2, h3, h4, h5, h6, label, span, div {
         height: 300px !important;
     }
 }
-
+.btn-event-calendar-text {
+    background-color: rgba(40, 72, 133, 1); /* Лучше использовать rgba для прозрачности */
+    border: none;
+    padding: 10px 35px;
+    border-radius: 7px;
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    transition: .4s;
+    margin-top: 10px; /* <-- Добавляем отступ сверху */
+}
 @media (max-width: 768px) {
     .event-main-content {
       flex-direction: column;
