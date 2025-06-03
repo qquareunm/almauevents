@@ -17,13 +17,7 @@ def index(request):
     subcategory_id = request.GET.get('subcategory', None)
 
     events = Event.objects.filter(
-        date__gte=timezone.now().date()
-    ).order_by("date", "start_time")
-
- 
-
-    events = Event.objects.filter(
-        Q(date__gt=timezone.now().date())
+        Q(date__gte=timezone.now().date())
     ).order_by("date", "start_time")
 
   
